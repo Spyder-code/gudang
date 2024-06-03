@@ -1,0 +1,116 @@
+ini tugas bu eny
+
+         Jabatan      Fungsional pada website        Keterangan
+ali    = bos       -> Produk, Mitra, Bahan        => create read edit
+arya   = produksi  -> penjahitan, detail jahit    => create read
+febi   = gudang    -> pembelian, detail pembelian => create read
+ian    = penjualan -> Penjualan, detail penjualan => create read
+eriq   = HRD       -> user, Penggajian,           => create read edit
+anonim = finance   -> Finance                     => create read
+
+user & password login: nama masing"
+kecuali user anonim pass: riqqi
+
+anggota memiliki tanggung jawab modul berbeda mulai minggu depan
+tulis nama semua kelompok kemudian bold yang bagiannya
+
+Progesss:
+Login & Logout sudah bisa
+Seeder: UserSeeder, BahanSeeder, ProdukSeeder, MitraSeeder, PenjualanSeeder, DetailPenjualanSeeder
+contoh:
+ketik di terminal : php spark db:seed UserSeeder
+___________________________________________________________
+Buat tabel view untuk lihat grafik pada index bos
+->view_jumlah_produk_penjualan_tahunan
+->view_pendapatan_penjualan_tahunan
+->view_data_penjualan_tahunan
+
+copy paste code berikut pada sql localhost/phpmyadmin: 
+
+CREATE VIEW view_jumlah_produk_penjualan_tahunan AS SELECT DISTINCT
+    YEAR(p.tgl) AS tahun,
+    SUM(dp.jumlah) AS jumlah
+FROM
+    detail_penjualan dp,
+    penjualan p,
+    produk pr
+WHERE
+    p.id_penjualan = dp.id_penjualan AND
+    pr.id_produk=dp.id_produk
+GROUP BY
+    YEAR(p.tgl);
+
+CREATE VIEW view_pendapatan_penjualan_tahunan AS SELECT
+year(p.tgl) as tahun,
+	sum(p.total_bayar) as total
+    FROM penjualan p
+    GROUP BY year(p.tgl)
+
+CREATE VIEW view_data_penjualan_tahunan AS
+SELECT
+    p.id_penjualan,
+    YEAR(p.tgl) AS tahun,
+    p.total_bayar,
+    pr.id_produk, dp.jumlah,
+    dp.total
+FROM
+    penjualan p,
+    detail_penjualan dp,
+    produk pr
+WHERE
+    p.id_penjualan = dp.id_penjualan AND pr.id_produk=dp.id_produk 
+
+CREATE VIEW view_jumlah_produk_penjualan_bulanan_2019 AS SELECT DISTINCT
+    monthname(p.tgl) AS bulan,
+    SUM(dp.jumlah) AS jumlah
+FROM
+    detail_penjualan dp,
+    penjualan p,
+    produk pr
+WHERE
+    p.id_penjualan = dp.id_penjualan AND
+    pr.id_produk=dp.id_produk AND YEAR(p.tgl)=2019
+GROUP BY
+    month(p.tgl)
+
+CREATE VIEW view_pendapatan_penjualan_bulanan_2023 AS SELECT
+monthname(p.tgl) as bulan,
+	sum(p.total_bayar) as total
+    FROM penjualan p
+    WHERE year(p.tgl)=2023
+    GROUP BY month(p.tgl)
+
+CREATE VIEW view_data_penjualan_bulanan_2019 AS SELECT
+    p.id_penjualan,
+    monthname(p.tgl) AS bulan,
+    p.total_bayar,
+    pr.id_produk, dp.jumlah,
+    dp.total
+FROM
+    penjualan p,
+    detail_penjualan dp,
+    produk pr
+WHERE
+    p.id_penjualan = dp.id_penjualan AND pr.id_produk=dp.id_produk AND year(p.tgl)=2019
+___________________________________________________________
+buat view untuk penjahitan (Arya) diagram
+
+CREATE VIEW view_jumlah_produksi_total_produk AS SELECT p.nama, SUM(dj.jumlah) as jumlah FROM produk as p, detail_jahit as dj WHERE p.id_produk = dj.id_produk GROUP BY p.id_produk
+___________________________________________________________
+Kurang:
+Belum ada otorisasi
+___________________________________________________________
+___________________________________________________________
+___________________________________________________________
+
+---------------------riqqi---------------------
+HRD
+
+kurang
+- belum ada fitur lembur
+- penghitungan awal penggajian masih awal bulan bukan dari esok hari penggajian bulan kemaren
+- menambahkan foto absen hari ini per karyawan di dashboard hrd
+---------------------riqqi---------------------
+
+
+---------------------ian-------------------
