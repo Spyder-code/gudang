@@ -33,10 +33,6 @@
                             <td><strong><?= $produk['jumlah_produksi_perkain']; ?> Pics</strong></td>
                         </tr>
                         <tr>
-                            <td style="width: 250px;"><strong>Panjang Kain</strong> Per Produksi</td>
-                            <td><strong><?= $produk['panjang_kain_perproduksi']; ?></strong></td>
-                        </tr>
-                        <tr>
                             <td style="width: 250px;"><strong>Status</strong> Produk</td>
                             <td><strong><?= $produk['status']; ?></strong></td>
                         </tr>

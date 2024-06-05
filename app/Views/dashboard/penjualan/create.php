@@ -23,6 +23,10 @@
                             </select>
                         </div>
                         <div class="mb-3">
+                            <label for="nama_customer" class="form-label">Nama Customer</label>
+                            <input type="text" class="form-control" name="nama_customer" id="nama_customer">
+                        </div>
+                        <div class="mb-3">
                             <label for="harga" class="form-label">Harga</label>
                             <input type="text" class="form-control" name="harga" id="harga" readonly>
                         </div>

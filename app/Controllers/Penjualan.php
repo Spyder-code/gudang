@@ -85,6 +85,21 @@ class Penjualan extends BaseController
         return view('dashboard/penjualan/view', $data);
     }
 
+    public function laporan()
+    {
+        $month = $this->request->getGet('month') ?? date('m');
+        $year = $this->request->getGet('year') ?? date('Y');
+        $data = [
+            'title' => 'Penjualan',
+            'pages' => 'Laporan Penjualan',
+            'data' => $this->penjualanModel->where('month(tgl)', $month)->where('year(tgl)', $year)->findAll(),
+            'month' => $month,
+            'year' => $year
+        ];
+
+        return view('dashboard/penjualan/laporan', $data);
+    }
+
     public function coba()
     {
         $data = [
@@ -119,6 +134,7 @@ class Penjualan extends BaseController
                 'id_produk' => $this->request->getPost('id_produk'),
                 'harga' => $this->request->getPost('harga'),
                 'jumlah' => $this->request->getPost('jumlah'),
+                'nama_customer' => $this->request->getPost('nama_customer'),
                 'total' => $this->request->getPost('total'),
             ]
         ];

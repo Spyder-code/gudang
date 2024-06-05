@@ -7,7 +7,7 @@
                 <div class="card-header">
                     <span class="h5"><?= $title ?></span>
                     <div class="card-tools">
-                        <button type="button" class="btn btn-sm btn-outline-dark" onclick="window.location.href='<?= base_url('produksi/tambahproduksi'); ?>'">Tambah Data</button>
+                        <button type="button" class="btn btn-sm btn-outline-dark" onclick="window.location.href='<?= base_url('produk/create'); ?>'">Tambah Data</button>
                     </div>
                 </div>
                 <div class="card-body">
@@ -31,31 +31,33 @@
                     <table id="example2" class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Tanggal</th>
-                                <th scope="col">Penjahit</th>
-                                <th scope="col">Bahan</th>
-                                <th scope="col">Produk</th>
-                                <th scope="col">Total Bahan</th>
-                                <th scope="col">Jumlah Produk</th>
-                                <th scope="col">Total Bayar</th>
-                                <th scope="col">Aksi</th>
+                                <th>No</th>
+                                <th>Tanggal</th>
+                                <th>Supplier</th>
+                                <th>Bahan</th>
+                                <th>Jumlah</th>
+                                <th>Harga</th>
+                                <th>Total</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php $no = 1; ?>
-                            <?php foreach ($data as $user) : ?>
+                            <?php foreach ($data as  $row) : ?>
                                 <tr>
-                                    <th scope="row"><?= $no++; ?></th>
-                                    <td><?= date('d/m/Y', strtotime($user['tgl'])); ?></td>
-                                    <td><?= $user['nama_penjahit']; ?></td>
-                                    <td><?= $user['nama_bahan']; ?></td>
-                                    <td><?= $user['nama_produk']; ?></td>
-                                    <td><?= $user['total_bahan']; ?></td>
-                                    <td><?= $user['jumlah_produk']; ?></td>
-                                    <td><?= "Rp " . number_format($user['total_bayar'], 0, ',', '.');  ?></td>
+                                    <th scope="row"><?= $no++; ?></td>
+                                    <td><?= $row['tgl']; ?></td>
+                                    <td><?= $row['supplier']; ?></td>
+                                    <td><?= $row['nama_bahan']; ?></td>
+                                    <td><?= $row['jumlah']; ?></td>
+                                    <td>Rp <?= number_format($row['harga'], 0, ',', '.'); ?></td>
+                                    <td>Rp <?= number_format($row['total'], 0, ',', '.'); ?></td>
                                     <td>
-                                        <a class="btn btn-sm btn-outline-secondary" id="btnDetail" href="<?= base_url('produksi/detailPenjahitan/' . $user['no_penjahitan']); ?>">Detail</a>
+                                        <a class="btn btn-sm btn-outline-secondary" id="btnDetail" href="<?= base_url('produk/detail/' . $row['no_pembelian']); ?>">Detail</a>
+                                        <a href="<?= base_url('produk/edit/' . $row['no_pembelian']); ?>" class="btn btn-sm btn-outline-success">Edit</a>
+                                        <?php if ( session()->get('jabatan') == 'gudang') : ?>
+                                            <a href="<?= base_url('gudang/ajukan_produksi/' . $row['no_pembelian']); ?>" class="btn btn-sm btn-outline-warning">Ajukan Produksi</a>
+                                        <?php endif; ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

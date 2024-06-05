@@ -44,15 +44,29 @@ class Produksi extends BaseController
 
     public function tampil()
     {
+        $model = new Penjahitan();
         $data = [
             'title' => 'Penjahitan',
             'pages' => 'Produksi',
-            // Menampilkan daftar user
-            'users' => $this->jahit->findAll(),
-            'Bulan' => $this->jahit->getBulanProduksiBatik(),
-            'Tahun' => $this->jahit->getTahunProduksiBatik()
+            'data' => $model->getAllData()
         ];
         return view('dashboard/produksi/tampil', $data);
+    }
+
+    public function laporan()
+    {
+        $model = new Penjahitan();
+        $month = $this->request->getGet('month') ?? date('m');
+        $year = $this->request->getGet('year') ?? date('Y');
+        $where = 'YEAR(penjahitan.tgl) = ' . $year . ' AND MONTH(penjahitan.tgl) = ' . $month;
+        $data = [
+            'title' => 'Laporan Produksi',
+            'pages' => 'Laporan Produksi',
+            'data' => $model->getAllDataWith($where),
+            'month' => $month,
+            'year' => $year,
+        ];
+        return view('dashboard/produksi/laporan', $data);
     }
 
     public function detailPenjahitan($id)

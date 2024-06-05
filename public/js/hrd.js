@@ -69,9 +69,6 @@ const myModalAlternative = new bootstrap.Modal(document.getElementById('myModal'
         }
         // kirim variable data ke server
 
-
-
-
         // kirim data ke server
         $.ajax({
           type: 'POST',

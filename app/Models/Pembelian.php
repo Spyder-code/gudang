@@ -239,4 +239,15 @@ class Pembelian extends Model
         FROM detail_pembelian dp, pembelian p, bahan pr
         WHERE p.no_pembelian = dp.no_pembelian AND pr.id_bahan=dp.id_bahan")->getRow();
     }
+
+    public function getAllData()
+    {
+        return $this->db->table('detail_pembelian')
+                ->join('pembelian', 'pembelian.no_pembelian = detail_pembelian.no_pembelian')
+                ->join('bahan', 'bahan.id_bahan = detail_pembelian.id_bahan')
+                ->join('mitra', 'mitra.id_mitra = pembelian.id_supplier')
+                ->select('detail_pembelian.*, pembelian.tgl, bahan.nama as nama_bahan, mitra.nama as supplier')
+                ->orderBy('pembelian.tgl', 'DESC')
+                ->get()->getResultArray();
+    }
 }

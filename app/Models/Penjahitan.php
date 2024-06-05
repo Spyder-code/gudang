@@ -86,7 +86,21 @@ class Penjahitan extends Model
                 ->join('user', 'user.id_user = penjahitan.id_user')
                 ->join('penjahit', 'penjahit.id_penjahit = penjahitan.id_penjahit')
                 ->join('bahan', 'bahan.id_bahan = penjahitan.id_bahan')
+                ->join('detail_jahit', 'detail_jahit.no_penjahitan = penjahitan.no_penjahitan')
+                ->join('produk', 'produk.id_produk = detail_jahit.id_produk')
+                ->select('penjahitan.*, user.username as created_by, penjahit.nama as nama_penjahit, bahan.nama as nama_bahan, produk.nama as nama_produk, detail_jahit.jumlah as jumlah_produk')
+                ->orderBy('penjahitan.tgl', 'DESC')
+                ->get()->getResultArray();
+    }
+    
+    public function getAllDataWith($where)
+    {
+        return $this->db->table('penjahitan')
+                ->join('user', 'user.id_user = penjahitan.id_user')
+                ->join('penjahit', 'penjahit.id_penjahit = penjahitan.id_penjahit')
+                ->join('bahan', 'bahan.id_bahan = penjahitan.id_bahan')
                 ->select('penjahitan.*, user.username as created_by, penjahit.nama as nama_penjahit, bahan.nama as nama_bahan')
+                ->where($where)
                 ->orderBy('penjahitan.tgl', 'DESC')
                 ->get()->getResultArray();
     }

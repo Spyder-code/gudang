@@ -64,6 +64,12 @@
                             Produk
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('penjualan/laporan') ?>" class="nav-link <?= $pages === 'Laporan Penjualan' ? 'active' : '' ?>">
+                            <i class="nav-icon fas fa-clipboard"></i>
+                            <p>Laporan</p>
+                        </a>
+                    </li>
                 <?php elseif (session()->get('jabatan') === 'hrd') : ?>
                     <li class="nav-item">
                         <a href="<?= base_url('user') ?>" class="nav-link <?= $pages === 'User' ? 'active' : '' ?>">
@@ -119,12 +125,12 @@
                             <p>Mitra</p>
                         </a>
                     </li> -->
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a href="<?= base_url('bahan') ?>" class="nav-link <?= $pages === 'Bahan' ? 'active' : '' ?>">
                             <i class="nav-icon fas fa-boxes"></i>
                             <p>Bahan</p>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
                         <a href="<?= base_url('gudang/laporan') ?>" class="nav-link <?= $pages === 'Laporan' ? 'active' : '' ?>">
                             <i class="nav-icon fas fa-clipboard"></i>
@@ -136,6 +142,43 @@
                         <a href="<?= base_url('produksi/tampil') ?>" class="nav-link <?= $pages === 'Produksi' ? 'active' : '' ?>">
                             <i class="nav-icon fas fa-box"></i>
                             <p>Produksi</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('bahan') ?>" class="nav-link <?= $pages === 'Bahan' ? 'active' : '' ?>">
+                            <i class="nav-icon fas fa-boxes"></i>
+                            <p>Bahan</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('produksi/laporan') ?>" class="nav-link <?= $pages === 'Laporan Produksi' ? 'active' : '' ?>">
+                            <i class="nav-icon fas fa-clipboard"></i>
+                            <p>Laporan</p>
+                        </a>
+                    </li>
+                <?php elseif (session()->get('jabatan') === 'supplier') : ?>
+                    <li class="nav-item">
+                        <a href="<?= base_url('mitra') ?>" class="nav-link <?= $pages === 'Mitra' ? 'active' : '' ?>">
+                            <i class="nav-icon fas fa-box"></i>
+                            <p>Supplier</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('pembelian') ?>" class="nav-link <?= $pages === 'Pembelian' ? 'active' : '' ?>">
+                            <i class="nav-icon fas fa-shopping-bag"></i>
+                            <p>Pembelian</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('bahan') ?>" class="nav-link <?= $pages === 'Bahan' ? 'active' : '' ?>">
+                            <i class="nav-icon fas fa-boxes"></i>
+                            <p>Data Bahan</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('produksi/laporan') ?>" class="nav-link <?= $pages === 'Laporan Produksi' ? 'active' : '' ?>">
+                            <i class="nav-icon fas fa-clipboard"></i>
+                            <p>Laporan</p>
                         </a>
                     </li>
                 <?php endif; ?>

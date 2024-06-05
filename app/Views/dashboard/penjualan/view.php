@@ -35,7 +35,6 @@
                                 <th>ID Penjualan</th>
                                 <th>Tanggal</th>
                                 <th>Total Bayar</th>
-                                <th>ID User</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -48,7 +47,6 @@
                                     <td><?= $user['id_penjualan']; ?></td>
                                     <td><?= $user['tgl']; ?></td>
                                     <td><?= "Rp " . number_format($user['total_bayar'], 0, ',', '.');  ?></td>
-                                    <td><?= $user['id_user']; ?></td>
                                     <td>
                                         <a class="btn btn-sm btn-outline-secondary" id="btnDetail" href="<?= base_url('penjualan/detail/' . $user['id_penjualan']); ?>">Detail</a>
                                     </td>

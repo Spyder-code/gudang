@@ -24,7 +24,7 @@ class ProdukController extends BaseController
         // $data['produk'] = $produk;
         // $data['pager'] = $model->pager;
         // $data['currentPage'] = $currentPage;
-
+            
         $data = [
             'title' => 'Produk',
             'pages' => 'Produk',

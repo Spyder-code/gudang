@@ -32,9 +32,8 @@
                         <thead>
                             <th>No</th>
                             <th>Nama</th>
-                            <th>Stok</th>
+                            <th>Jumlah Potong</th>
                             <th>Harga</th>
-                            <th>Panjang</th>
                             <th>Status</th>
                             <th>Action</th>
                         </thead>
@@ -46,7 +45,6 @@
                                     <td><?= $row['nama']; ?></td>
                                     <td><?= $row['jumlah']; ?></td>
                                     <td>Rp <?= number_format($row['harga'], 0, ',', '.'); ?></td>
-                                    <td><?= $row['panjang_kain']; ?></td>
                                     <td><?= $row['status']; ?></td>
                                     <td><a href="<?= base_url('bahan/edit/' . $row['id_bahan']); ?>" class="btn btn-sm btn-outline-secondary">Edit</a></td>
                                 </tr>

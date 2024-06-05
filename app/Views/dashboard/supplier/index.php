@@ -7,7 +7,7 @@
                 <div class="card-header">
                     <span class="h5"><?= $title ?></span>
                     <div class="card-tools">
-                        <button type="button" class="btn btn-sm btn-outline-dark" onclick="window.location.href='<?= base_url('produksi/tambahproduksi'); ?>'">Tambah Data</button>
+                        <button type="button" class="btn btn-sm btn-outline-dark" onclick="window.location.href='<?= base_url('produk/create'); ?>'">Tambah Data</button>
                     </div>
                 </div>
                 <div class="card-body">
@@ -28,39 +28,7 @@
                         </div>
                     <?php endif ?>
 
-                    <table id="example2" class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Tanggal</th>
-                                <th scope="col">Penjahit</th>
-                                <th scope="col">Bahan</th>
-                                <th scope="col">Produk</th>
-                                <th scope="col">Total Bahan</th>
-                                <th scope="col">Jumlah Produk</th>
-                                <th scope="col">Total Bayar</th>
-                                <th scope="col">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php $no = 1; ?>
-                            <?php foreach ($data as $user) : ?>
-                                <tr>
-                                    <th scope="row"><?= $no++; ?></th>
-                                    <td><?= date('d/m/Y', strtotime($user['tgl'])); ?></td>
-                                    <td><?= $user['nama_penjahit']; ?></td>
-                                    <td><?= $user['nama_bahan']; ?></td>
-                                    <td><?= $user['nama_produk']; ?></td>
-                                    <td><?= $user['total_bahan']; ?></td>
-                                    <td><?= $user['jumlah_produk']; ?></td>
-                                    <td><?= "Rp " . number_format($user['total_bayar'], 0, ',', '.');  ?></td>
-                                    <td>
-                                        <a class="btn btn-sm btn-outline-secondary" id="btnDetail" href="<?= base_url('produksi/detailPenjahitan/' . $user['no_penjahitan']); ?>">Detail</a>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, architecto, in ipsum dolor corporis provident iste corrupti minima laudantium dignissimos aperiam omnis eius quas fuga? Ab corporis necessitatibus quaerat exercitationem!</p>
                 </div>
             </div>
         </div>

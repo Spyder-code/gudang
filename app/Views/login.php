@@ -29,12 +29,13 @@
       place-items: center;
       margin: 0;
       padding: 0 24px;
-      background-color: #157ae1;
+      /* background-color: #157ae1; */
       background-size: 2000px 1000px;
       background-position: -500px 0;
       color: #f9f9f9;
       font-family: "Euclid Circular A";
       animation: gradient 10s infinite alternate linear;
+      color: #161616 !important;
     }
 
     @media (width >=500px) {
@@ -52,8 +53,9 @@
       width: 90%;
       padding: 70px 30px 44px;
       border-radius: 22px;
-      background: #161616;
+      /* background: #161616; */
       text-align: center;
+      border: 1px solid black;
     }
 
     @media (width >=450px) {
@@ -127,7 +129,7 @@
 
     .login-form input {
       background: transparent;
-      border: 2px solid rgba(255, 255, 255, 0.1);
+      border: 2px solid black;
       font-size: 18px;
       padding: 0 20px 0 50px;
       color: inherit;
@@ -162,11 +164,8 @@
 <body>
 
   <div class="login">
-    <div class="avatar">
-      <img src="<?= base_url('img/pengaduan.jpg') ?>" alt="Gambar">
-    </div>
-    <h2>Login Dulu Gak Si</h2>
-    <h3>Hello Guysss!</h3>
+    <h2>LOGIN</h2>
+    <!-- <h3>Hello Guysss!</h3> -->
 
     <?php if (session()->getFlashdata('danger')) : ?>
         <div class="alert alert-danger" style="background-color: #ec9e9e; color: red; padding: 7px; border: 1px solid red; border-radius: 25px; margin: 10px;">
@@ -177,7 +176,7 @@
     <form class="login-form" method="post" action="<?= base_url('home/login'); ?>" autocomplete="off">
       <div class="textbox">
         <input type="text" placeholder="Username" name="username" autofocus />
-        <span class="material-symbols-outlined"> account_circle </span>
+        <span class="material-symbols-outlined" style="color: #161616 !important;"> account_circle </span>
       </div>
       <div class="textbox">
         <!-- <span><?php if (!empty($error)) : echo $error ?></span>
@@ -185,7 +184,7 @@
       </div>
       <div class="textbox">
         <input type="password" placeholder="Password" name="pass" />
-        <span class="material-symbols-outlined"> lock </span>
+        <span class="material-symbols-outlined" style="color: #161616 !important;"> lock </span>
       </div>
       <button type="submit">LOGIN</button>
       <!-- <a href="https://website.com">Forgot your credentials?</a> -->

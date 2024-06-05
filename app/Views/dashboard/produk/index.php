@@ -7,7 +7,9 @@
                 <div class="card-header">
                     <span class="h5"><?= $title ?></span>
                     <div class="card-tools">
-                        <button type="button" class="btn btn-sm btn-outline-dark" onclick="window.location.href='<?= base_url('produk/create'); ?>'">Tambah Data</button>
+                        <?php if ( session()->get('jabatan') == 'gudang') : ?>
+                            <button type="button" class="btn btn-sm btn-outline-dark" onclick="window.location.href='<?= base_url('produk/create'); ?>'">Tambah Data</button>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="card-body">
@@ -51,7 +53,9 @@
                                     <td>
                                         <a class="btn btn-sm btn-outline-secondary" id="btnDetail" href="<?= base_url('produk/detail/' . $row['id_produk']); ?>">Detail</a>
                                         <a href="<?= base_url('produk/edit/' . $row['id_produk']); ?>" class="btn btn-sm btn-outline-success">Edit</a>
-                                        <a href="<?= base_url('gudang/ajukan_produksi/' . $row['id_produk']); ?>" class="btn btn-sm btn-outline-warning">Ajukan Produksi</a>
+                                        <?php if ( session()->get('jabatan') == 'gudang') : ?>
+                                            <a href="<?= base_url('gudang/ajukan_produksi/' . $row['id_produk']); ?>" class="btn btn-sm btn-outline-warning">Ajukan Produksi</a>
+                                        <?php endif; ?>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

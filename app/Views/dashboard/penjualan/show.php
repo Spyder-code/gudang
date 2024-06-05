@@ -15,8 +15,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
-                                <th scope="col">ID Penjualan</th>
-                                <th scope="col">ID Produk</th>
+                                <th scope="col">Produk</th>
                                 <th scope="col">Harga</th>
                                 <th scope="col">Jumlah</th>
                                 <th scope="col">Total</th>
@@ -27,7 +26,6 @@
                             <?php foreach ($details as $user) : ?>
                                 <tr>
                                     <th scope="row"><?= $no++; ?></th>
-                                    <td><?= $user['id_penjualan']; ?></td>
                                     <td><?= $user['id_produk']; ?></td>
                                     <td><?= "Rp " . number_format($user['harga'], 0, ',', '.');  ?></td>
                                     <td><?= $user['jumlah']; ?></td>

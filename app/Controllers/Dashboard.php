@@ -24,6 +24,8 @@ class Dashboard extends BaseController
             return redirect()->to('gudang');
         } else if ($jabatan == 'produksi') {
             return redirect()->to('produksi');
+        } else if ($jabatan == 'supplier') {
+            return redirect()->to('mitra');
         } else {
             return redirect()->to('home');
         }
