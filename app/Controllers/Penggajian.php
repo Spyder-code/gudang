@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use CodeIgniter\I18n\Time;
+use Dompdf\Dompdf;
 
 class Penggajian extends BaseController
 {
@@ -228,7 +229,15 @@ class Penggajian extends BaseController
                 'bulan' => $bulan,
                 'pencatat'  => $pencatat,
             ];
-            return view('penggajian/slipGaji', $data);
+
+            $dompdf = new Dompdf();
+            $html = view('penggajian/slipGaji', $data);
+            $dompdf->loadHtml($html);
+            $dompdf->setPaper('A4');
+            $dompdf->render();
+            $dompdf->stream('Laporan Slip Gaji.pdf',['compress'=>true,'Attachment'=>false]);
+            // return view('penggajian/slipGaji', $data);
+
         }
         return redirect()->route('dashboard');
     }

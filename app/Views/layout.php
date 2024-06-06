@@ -62,126 +62,6 @@
 
 <body onload="updateClock()">
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <a class="navbar-brand gaprint" href="/dashboard">M-Sari</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-
-          <!-- BOSSSSSS -- ALI -->
-          <?php if (session()->get('jabatan') == 'bos') : ?>
-            <li class="nav-item">
-              <a class="nav-link" href="/produk">Produk</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/mitra">Mitra</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/bahan">Bahan</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/penjahit">Penjahit</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/chat">Chat</a>
-            </li>
-          <?php endif; ?>
-
-
-
-          <!-- PRODUKSI -- ARYA  -->
-          <?php if (session()->get('jabatan') == 'produksi') : ?>
-            <li class="nav-item">
-
-            <li class="nav-item">
-              <a class="nav-link" href="/produksi/penjahitan">Produksi</a>
-            </li>
-          <?php endif; ?>
-
-
-          <!-- GUDANG -- FEBI  -->
-          <?php if (session()->get('jabatan') == 'gudang') : ?>
-            <li class="nav-item">
-              <a class="nav-link" href="/gudang/tampil">Gudang</a>
-            </li>
-            <!-- bahan -->
-            <li class="nav-item">
-              <a class="nav-link" href="/gudang/bahan">Bahan</a>
-            </li>
-            <!-- produk -->
-            <li class="nav-item">
-              <a class="nav-link" href="/gudang/produk">Produk</a>
-            </li>
-            <!-- mitra -->
-            <li class="nav-item">
-              <a class="nav-link" href="/gudang/mitra">Mitra</a>
-            </li>
-          <?php endif; ?>
-
-
-          <!-- PENJUALAN -- IAN  -->
-          <?php if (session()->get('jabatan') == 'penjualan') : ?>
-            <li class="nav-item">
-              <a class="nav-link gaprint" href="/penjualan/tampol">Penjualan</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/penjualan/produk">Produk</a>
-            </li>
-          <?php endif; ?>
-
-
-          <!-- HRD -- RIQQI  -->
-          <?php if (session()->get('jabatan') == 'hrd') : ?>
-            <li class="nav-item">
-              <a class="nav-link" href="/hrd/tampil">User</a>
-            </li>
-          <?php endif; ?>
-          <?php if (session()->get('jabatan') == 'hrd') : ?>
-            <li class="nav-item">
-              <a class="nav-link" href="/penggajian">Penggajian</a>
-            </li>
-          <?php endif; ?>
-
-
-          <!-- FINANCE -- ANONIM  -->
-          <?php if (session()->get('jabatan') == 'finance') : ?>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Finance</a>
-            </li>
-          <?php endif; ?>
-          <?php if (session()->get('jabatan') != 'bos') : ?>
-            <li class="nav-item">
-              <a class="nav-link" href="/chatAll">Chat</a>
-            </li>
-          <?php endif; ?>
-          <li class="nav-item">
-            <a class="nav-link" href="/home/logout">Log Out</a>
-          </li>
-          <?php if (session()->get('jabatan') != 'bos') : ?>
-            <li class="nav-item">
-              <a class="nav-link" href="/absen">Absen</a>
-            </li>
-          <?php endif; ?>
-          <li class="nav-item">
-            <p class="time gaprint"><span id="waktu" class="jam"></p>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <section>
-    <!-- menampilkan username yang login -->
-    <div class="d-flex ">
-      <p class="px-4 gaprint"> <span id="tanggal"></span></p>
-      <p class="ms-auto px-4 gaprint">Selamat Datang <?= session()->get('username'); ?> (<?= session()->get('jabatan') ?>)</p>
-    </div>
-  </section>
-  <!-- End Navbar -->
-
   <!-- Main content -->
   <main class="container my-4">
     <?= $this->renderSection('content') ?>
@@ -201,6 +81,7 @@
       setTimeout(updateClock, 1000);
     };
   </script>
+  <?= $this->renderSection('js') ?>
 
 </body>
 

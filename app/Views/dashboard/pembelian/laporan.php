@@ -25,7 +25,7 @@
                         </div>
                     <?php endif ?>
 
-                    <form action="<?= base_url('gudang/laporan'); ?>" method="GET" class="row">
+                    <form action="<?= base_url('supplier/laporan'); ?>" method="GET" class="row">
                         <div class="col-3">
                             <label for="">Bulan</label>
                             <select name="month" id="month" class="form-control form-select" onchange="submit()">
@@ -53,7 +53,7 @@
                             </select>
                         </div>
                         <div class="col-3">
-                            <button class="btn btn-success mt-4" formtarget="d_blank" type="submit" formaction="<?= base_url('gudang/laporan_cetak'); ?>"><i class="fas fa-print"></i> Cetak</button>
+                        <button class="btn btn-success mt-4" formtarget="d_blank" type="submit" formaction="<?= base_url('supplier/laporan_cetak'); ?>"><i class="fas fa-print"></i> Cetak</button>
                         </div>
                     </form>
                 </div>
@@ -63,60 +63,32 @@
         <div class="col-12 mt-3">
             <div class="card">
                 <div class="card-header">
-                    <span class="h5">Laporan Barang Masuk</span>
+                    <span class="h5">Laporan Pembelian Bahan</span>
                 </div>
                 <div class="card-body">
-                    <table  class="table table-bordered table-hover">
+                    <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Tanggal</th>
-                                <th scope="col">Produk</th>
-                                <th scope="col">Ukuran</th>
-                                <th scope="col">Jumlah</th>
-                                <!-- <th scope="col">ID User</th> -->
+                                <th>No</th>
+                                <th>Tanggal</th>
+                                <th>Supplier</th>
+                                <th>Bahan</th>
+                                <th>Jumlah</th>
+                                <th>Harga</th>
+                                <th>Total</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php $no = 1; ?>
-                            <?php foreach ($masuk as $item) : ?>
+                            <?php foreach ($data as  $row) : ?>
                                 <tr>
-                                    <th scope="row"><?= $no++; ?></th>
-                                    <td><?= date('d/m/Y H:i', strtotime($item['tgl_penjahitan'])); ?></td>
-                                    <td><?= $item['nama_produk']; ?></td>
-                                    <td><?= $item['ukuran']; ?></td>
-                                    <td><?= $item['jumlah']; ?></td>
-                                </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-12 mt-3">
-            <div class="card">
-                <div class="card-header">
-                    <span class="h5">Laporan Barang Keluar</span>
-                </div>
-                <div class="card-body">
-                    <table  class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Tanggal</th>
-                                <th scope="col">Produk</th>
-                                <th scope="col">Jumlah</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php $no = 1; ?>
-                            <?php foreach ($keluar as $item) : ?>
-                                <tr>
-                                    <th scope="row"><?= $no++; ?></th>
-                                    <td><?= date('d/m/Y H:i', strtotime($item['tgl'])); ?></td>
-                                    <td><?= $item['nama_produk']; ?></td>
-                                    <td><?= $item['jumlah']; ?></td>
+                                    <th scope="row"><?= $no++; ?></td>
+                                    <td><?= date('d/m/Y', strtotime($row['tgl'])); ?></td>
+                                    <td><?= $row['supplier']; ?></td>
+                                    <td><?= $row['nama_bahan']; ?></td>
+                                    <td><?= $row['jumlah']; ?></td>
+                                    <td>Rp <?= number_format($row['harga'], 0, ',', '.'); ?></td>
+                                    <td>Rp <?= number_format($row['total'], 0, ',', '.'); ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

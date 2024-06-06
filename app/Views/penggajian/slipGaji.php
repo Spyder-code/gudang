@@ -3,38 +3,37 @@
 <script src="https://unpkg.com/@develoka/angka-terbilang-js/index.min.js"> </script>
 
 <div class="row">
+  <div class="col-12">
+    <table style="width: 100%;">
+      <tr>
+        <td>
+          <article class="text-white"> -</article>
+          <article class="fs-5 p-2 "><b>SLIP GAJI KARYAWAN</b></article>
+          <article class="fs-6 "><b><?= $bulan ?></b></article>
+        </td>
+        <td>
+          <article>Tanggal</article>
+          <article>id Karyawan</article>
+          <article>Username</article>
+        </td>
+        <td>
+          <article>: <?= $tgl ?></article>
+          <article>: <?= $penggajian['id_user'] ?></article>
+          <article>: <?= $penggajian['username'] ?></article>
+        </td>
+      </tr>
+    </table>
+  </div>
   <div class="col">
     <div class="card border-primary">
-      <table class="table table-borderless table-sm">
-        <tr>
-          <td colspan="2">
-            <article class=""> <b>BATIK M SARI</b></article>
-            <article class="">Jl. Raya Jenggot No 67</article>
-            <article class="">Telp. 086498755521</article>
-          </td>
-          <td class="text-center">
-            <article class="text-white"> -</article>
-            <article class="fs-5 p-2 "><b>SLIP GAJI KARYAWAN</b></article>
-            <article class="fs-6 "><b><?= $bulan ?></b></article>
-          </td>
-          <td>
-            <article>Tanggal</article>
-            <article>id Karyawan</article>
-            <article>Username</article>
-          </td>
-          <td>
-            <article>: <?= $tgl ?></article>
-            <article>: <?= $penggajian['id_user'] ?></article>
-            <article>: <?= $penggajian['username'] ?></article>
-          </td>
-        </tr>
+      <table class="table table-borderless table-sm" style="width: 100%;">
         <tr>
           <td colspan="5">
             <hr class="m-0 p-1">
           </td>
         </tr>
         <tr>
-          <td>
+          <td style="width: 100px; !important">
             <article>Nama</article>
             <article>Jabatan</article>
           </td>
@@ -42,7 +41,6 @@
             <article>: <?= $penggajian['username'] ?></article>
             <article>: <?= $penggajian['jabatan'] ?></article>
           </td>
-          <td></td>
           <td>
             <article>Jenis Kelamin</article>
             <article>Bank</article>
@@ -171,7 +169,6 @@
   </div>
 
 </div>
-<a href="<?= base_url('dashboard') ?>" class="btn btn-primary">Kembali</a>
 
 <script>
   let gajiDiterima = <?= $penggajian['gaji'] ?>;

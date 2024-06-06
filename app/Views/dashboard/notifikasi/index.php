@@ -7,7 +7,9 @@
                 <div class="card-header">
                     <span class="h5"><?= $title ?></span>
                     <div class="card-tools">
-                        <button type="button" class="btn btn-sm btn-outline-dark" onclick="window.location.href='<?= base_url('bahan/create'); ?>'">Tambah Data</button>
+                        <?php if ( session()->get('jabatan') == 'gudang') : ?>
+                            <button type="button" class="btn btn-sm btn-outline-dark" onclick="window.location.href='<?= base_url('produk/create'); ?>'">Tambah Data</button>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="card-body">
@@ -30,28 +32,21 @@
 
                     <table id="example2" class="table table-bordered table-hover">
                         <thead>
-                            <th>No</th>
-                            <th>Nama</th>
-                            <th>Jumlah Potong</th>
-                            <th>Harga</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                            <tr>
+                                <th>No</th>
+                                <th>Tanggal</th>
+                                <th>Dari</th>
+                                <th>Pesan</th>
+                            </tr>
                         </thead>
                         <tbody>
                             <?php $no = 1; ?>
-                            <?php foreach ($bahan as  $row) : ?>
+                            <?php foreach ($data as  $row) : ?>
                                 <tr>
                                     <th scope="row"><?= $no++; ?></td>
-                                    <td><?= $row['nama']; ?></td>
-                                    <td><?= $row['jumlah']; ?></td>
-                                    <td>Rp <?= number_format($row['harga'], 0, ',', '.'); ?></td>
-                                    <td><?= $row['status']; ?></td>
-                                    <td>
-                                        <a href="<?= base_url('bahan/edit/' . $row['id_bahan']); ?>" class="btn btn-sm btn-outline-secondary">Edit</a>
-                                        <?php if ( session()->get('jabatan') == 'produksi') : ?>
-                                            <a href="<?= base_url('produksi/ajukan_bahan/' . $row['id_bahan']); ?>" class="btn btn-sm btn-outline-warning">Ajukan Pembelian</a>
-                                        <?php endif; ?>
-                                    </td>
+                                    <td><?= date('d/m/Y H:i:s', strtotime($row['tanggal'])); ?></td>
+                                    <td><?= $row['from']; ?></td>
+                                    <td><?= $row['pesan']; ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

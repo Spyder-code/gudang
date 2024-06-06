@@ -10,6 +10,7 @@ use App\Models\laporan_model;
 use App\Models\Produk;
 
 use CodeIgniter\I18n\Time;
+use Dompdf\Dompdf;
 
 helper('form');
 
@@ -32,44 +33,13 @@ class Penjualan extends BaseController
     public function index()
     {
         $model = new Produk();
-
         $data = [
             'title' => 'Dashboard',
-            'pages' => 'Dashboard'
+            'pages' => 'Dashboard',
+            'terjual' => $this->detailPenjualan->selectSum('jumlah')->first()['jumlah'],
+            'transaksi' => $this->penjualanModel->countAll(),
+            'total' => $this->penjualanModel->selectSum('total_bayar')->first()['total_bayar'],
         ];
-        $grafik = $model->getTotalPenjualanTahunan();
-        $data['grafik'] = $grafik;
-
-        $grafik2 = $model->getTotalPendapatanTahunan();
-        $data['grafik2'] = $grafik2;
-
-        $data['grafik3'] = $model->getNamaProdukTahunan();
-        // $data['Nmtahunan'] = $model->getTotalProdukTahunan();
-
-        $Rptahunan = $model->getRpPendapatanTahunan();
-        $data['Rptahunan'] = $Rptahunan;
-        $Qtytahunan = $model->getTotalTerjualTahunan();
-        $data['Qtytahunan'] = $Qtytahunan;
-
-        $data['grafikbulan2021'] = $model->getTotalPejualanBulananTahun2021();
-        $data['grafikbulan2022'] = $model->getTotalPejualanBulananTahun2022();
-        $data['grafikbulan2023'] = $model->getTotalPejualanBulananTahun2023();
-
-        $data['Qtybulanan2021'] = $model->getTotalTerjualBulanan2021();
-        $data['Qtybulanan2022'] = $model->getTotalTerjualBulanan2022();
-        $data['Qtybulanan2023'] = $model->getTotalTerjualBulanan2023();
-
-        $data['grafik2bulan2021'] = $model->getTotalPendapatanBulanan2021();
-        $data['grafik2bulan2022'] = $model->getTotalPendapatanBulanan2022();
-        $data['grafik2bulan2023'] = $model->getTotalPendapatanBulanan2023();
-
-        $data['Rpbulanan2021'] = $model->getRpPendapatanBulanan2021();
-        $data['Rpbulanan2022'] = $model->getRpPendapatanBulanan2022();
-        $data['Rpbulanan2023'] = $model->getRpPendapatanBulanan2023();
-
-        $data['grafik3bulan2021'] = $model->getNamaProdukBulanan2021();
-        $data['grafik3bulan2022'] = $model->getNamaProdukBulanan2022();
-        $data['grafik3bulan2023'] = $model->getNamaProdukBulanan2023();
 
         return view('dashboard/penjualan/index', $data);
     }
@@ -100,6 +70,31 @@ class Penjualan extends BaseController
         return view('dashboard/penjualan/laporan', $data);
     }
 
+    public function laporan_cetak()
+    {
+        $data = [
+            'title' => 'Laporan',
+            'pages'=> 'Laporan',
+        ];
+
+        $month = $this->request->getGet('month') ?? date('m');
+        $year = $this->request->getGet('year') ?? date('Y');
+        $bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+        $data['month'] = $this->request->getGet('month') ?? date('m');
+        $data['year'] = $this->request->getGet('year') ?? date('Y');
+        $data['data'] = $this->penjualanModel->where('month(tgl)', $month)->where('year(tgl)', $year)->findAll();
+        $data['title'] = 'LAPORAN '.$bulan[(int)$data['month']-1].' '.$data['year'];
+
+        $dompdf = new Dompdf();
+        $html = view('print/laporan_penjualan',$data);
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4');
+        $dompdf->render();
+        $dompdf->stream('Laporan Supplier.pdf',['compress'=>true,'Attachment'=>false]);
+
+        // return view('print/laporan_gudang',$data);
+    }
+
     public function coba()
     {
         $data = [
@@ -125,7 +120,13 @@ class Penjualan extends BaseController
     {
         $detailPenjualanModel = new DetailPenjualan();
         // masukkan data penjualan dulu baru detail
-        $this->penjualanModel->insert(['id_user' => session('id')]);
+        $arr = [
+            'id_user' => session('id'),
+            'total_bayar' => $this->request->getPost('total'),
+            'tgl' => $this->request->getPost('tgl'),
+            'nama_customer' => $this->request->getPost('nama_customer'),
+        ];
+        $this->penjualanModel->insert($arr);
         // ambil id terbaru
         $idPenjualan = $this->penjualanModel->ambilIdTerbaru();
         $data = [
@@ -155,7 +156,7 @@ class Penjualan extends BaseController
         $produkModel = new Produk();
         $data['penjualan'] = $penjualanModel->findAll();
         $data['produk'] = $produkModel->findAll();
-        $data['details'] = $detailpenjualanModel->where('id_penjualan', $id)->findAll();
+        $data['details'] = $detailpenjualanModel->join('produk', 'detail_penjualan.id_produk = produk.id_produk')->where('id_penjualan', $id)->findAll();
         $data['title'] = 'Detail Penjualan';
         $data['pages'] = 'Penjualan';
 

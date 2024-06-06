@@ -14,7 +14,7 @@ class Penjualan_model extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id_penjualan', 'tanggal', 'total_bayar', 'id_user'];
+    protected $allowedFields    = ['id_penjualan', 'tanggal', 'total_bayar', 'id_user','nama_customer'];
 
     // Dates
     protected $useTimestamps = false;

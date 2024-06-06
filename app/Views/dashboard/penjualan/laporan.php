@@ -52,6 +52,9 @@
                                 <option <?= $year=='2025'  ? 'selected' : ''?> value="2025">2025</option>
                             </select>
                         </div>
+                        <div class="col-3">
+                        <button class="btn btn-success mt-4" formtarget="d_blank" type="submit" formaction="<?= base_url('penjualan/laporan_cetak'); ?>"><i class="fas fa-print"></i> Cetak</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -67,10 +70,9 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>ID Penjualan</th>
                                 <th>Tanggal</th>
+                                <th>Customer</th>
                                 <th>Total Bayar</th>
-                                <th>ID User</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -79,10 +81,9 @@
                             <?php foreach ($data as $item) : ?>
                                 <tr>
                                     <th><?= $no++; ?></th>
-                                    <td><?= $item['id_penjualan']; ?></td>
-                                    <td><?= $item['tgl']; ?></td>
+                                    <td><?= date('d/m/Y', strtotime($item['tgl'])); ?></td>
+                                    <td><?= $item['nama_customer']; ?></td>
                                     <td><?= "Rp " . number_format($item['total_bayar'], 0, ',', '.');  ?></td>
-                                    <td><?= $item['id_user']; ?></td>
                                 </tr>
                                 <?php $totalpemasukan += $item['total_bayar'] ?>
                             <?php endforeach; ?>

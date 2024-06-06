@@ -14,7 +14,7 @@
                     <form action="<?= base_url('penjualan/store'); ?>" method="post" autocomplete="off">
                         <input type="hidden" name="id_user" value="<?= session('username') ?>">
                         <div class="mb-3">
-                            <label for="nama" class="form-label">ID Produk</label>
+                            <label for="nama" class="form-label">Produk</label>
                             <select name="id_produk" id="id_produk" class="form-control" required>
                                 <option value=""></option>
                                 <?php foreach ($produk as $row) : ?>

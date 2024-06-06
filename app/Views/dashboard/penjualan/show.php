@@ -26,7 +26,7 @@
                             <?php foreach ($details as $user) : ?>
                                 <tr>
                                     <th scope="row"><?= $no++; ?></th>
-                                    <td><?= $user['id_produk']; ?></td>
+                                    <td><?= $user['nama']; ?></td>
                                     <td><?= "Rp " . number_format($user['harga'], 0, ',', '.');  ?></td>
                                     <td><?= $user['jumlah']; ?></td>
                                     <td><?= "Rp " . number_format($user['total'], 0, ',', '.');  ?></td>

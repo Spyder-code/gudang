@@ -28,27 +28,33 @@
                 </li>
                 <?php if (session()->get('jabatan') === 'bos') : ?>
                     <li class="nav-item">
-                        <a href="<?= base_url('produk') ?>" class="nav-link <?= $pages === 'Produk' ? 'active' : '' ?>">
-                            <i class="nav-icon fas fa-box"></i>
-                            <p>Produk</p>
+                        <a href="<?= base_url('gudang/laporan') ?>" class="nav-link <?= $pages === 'Laporan' ? 'active' : '' ?>">
+                            <i class="nav-icon fas fa-file-pdf"></i>
+                            <p>Laporan Gudang</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?= base_url('mitra') ?>" class="nav-link <?= $pages === 'Mitra' ? 'active' : '' ?>">
-                            <i class="nav-icon fas fa-people-carry"></i>
-                            <p>Mitra</p>
+                        <a href="<?= base_url('produksi/laporan') ?>" class="nav-link <?= $pages === 'Laporan Produksi' ? 'active' : '' ?>">
+                            <i class="nav-icon fas fa-file-pdf"></i>
+                            <p>Laporan Produksi</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?= base_url('bahan') ?>" class="nav-link <?= $pages === 'Bahan' ? 'active' : '' ?>">
-                            <i class="nav-icon fas fa-boxes"></i>
-                            <p>Bahan</p>
+                        <a href="<?= base_url('supplier/laporan') ?>" class="nav-link <?= $pages === 'Laporan Supplier' ? 'active' : '' ?>">
+                            <i class="nav-icon fas fa-file-pdf"></i>
+                            <p>Laporan Supplier</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?= base_url('penjahit') ?>" class="nav-link <?= $pages === 'Penjahit' ? 'active' : '' ?>">
-                            <i class="nav-icon fas fa-id-badge"></i>
-                            <p>Penjahit</p>
+                        <a href="<?= base_url('penjualan/laporan') ?>" class="nav-link <?= $pages === 'Laporan Penjualan' ? 'active' : '' ?>">
+                            <i class="nav-icon fas fa-file-pdf"></i>
+                            <p>Laporan Penjualan</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('user') ?>" class="nav-link <?= $pages === 'User' ? 'active' : '' ?>">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>Manajemen Pengguna</p>
                         </a>
                     </li>
                 <?php elseif (session()->get('jabatan') === 'penjualan') : ?>
@@ -138,11 +144,28 @@
                         </a>
                     </li>
                 <?php elseif (session()->get('jabatan') === 'produksi') : ?>
-                    <li class="nav-item">
-                        <a href="<?= base_url('produksi/tampil') ?>" class="nav-link <?= $pages === 'Produksi' ? 'active' : '' ?>">
+                    <li class="nav-item menu-open <?= ($pages == 'Penjahit' || $pages == 'Penjahitan') ? 'active' : '' ?>">
+                        <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-box"></i>
-                            <p>Produksi</p>
+                            <p>
+                                Produksi
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
                         </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="<?= base_url('penjahit') ?>" class="nav-link <?= $pages === 'Penjahit' ? 'active' : '' ?>">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Data Penjahit</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= base_url('produksi/tampil') ?>" class="nav-link <?= $pages === 'Penjahitan' ? 'active' : '' ?>">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Data Penjahitan</p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a href="<?= base_url('bahan') ?>" class="nav-link <?= $pages === 'Bahan' ? 'active' : '' ?>">
@@ -176,9 +199,22 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?= base_url('produksi/laporan') ?>" class="nav-link <?= $pages === 'Laporan Produksi' ? 'active' : '' ?>">
+                        <a href="<?= base_url('supplier/laporan') ?>" class="nav-link <?= $pages === 'Laporan Supplier' ? 'active' : '' ?>">
                             <i class="nav-icon fas fa-clipboard"></i>
                             <p>Laporan</p>
+                        </a>
+                    </li>
+                <?php elseif (session()->get('jabatan') === 'finance') : ?>
+                    <li class="nav-item">
+                        <a href="<?= base_url('supplier/laporan') ?>" class="nav-link <?= $pages === 'Laporan Supplier' ? 'active' : '' ?>">
+                            <i class="nav-icon fas fa-shopping-bag"></i>
+                            <p>Laporan Pengeluaran</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('penjualan/laporan') ?>" class="nav-link <?= $pages === 'Laporan Penjualan' ? 'active' : '' ?>">
+                            <i class="nav-icon fas fa-clipboard-check"></i>
+                            <p>Laporan Pemasukan</p>
                         </a>
                     </li>
                 <?php endif; ?>
@@ -188,12 +224,14 @@
                         <p>Chat</p>
                     </a>
                 </li>
+                <?php if (session()->get('jabatan') != 'bos') : ?>
                 <li class="nav-item">
                     <a href="<?= base_url('absen') ?>" class="nav-link <?= $pages === 'Absensi' ? 'active' : '' ?>">
                         <i class="nav-icon fas fa-clock"></i>
                         Absensi
                     </a>
                 </li>
+                <?php endif; ?>
                 <li class="nav-item">
                     <a href="<?= base_url('home/logout') ?>" class="nav-link">
                         <i class="nav-icon fas fa-sign-out-alt"></i>

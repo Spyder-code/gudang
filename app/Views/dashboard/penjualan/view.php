@@ -32,7 +32,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>ID Penjualan</th>
+                                <th>Customer</th>
                                 <th>Tanggal</th>
                                 <th>Total Bayar</th>
                                 <th>Aksi</th>
@@ -44,8 +44,8 @@
                             <?php foreach ($users as $user) : ?>
                                 <tr>
                                     <th><?= $no++; ?></th>
-                                    <td><?= $user['id_penjualan']; ?></td>
-                                    <td><?= $user['tgl']; ?></td>
+                                    <td><?= $user['nama_customer']; ?></td>
+                                    <td><?= date('d/m/Y', strtotime($user['tgl'])); ?></td>
                                     <td><?= "Rp " . number_format($user['total_bayar'], 0, ',', '.');  ?></td>
                                     <td>
                                         <a class="btn btn-sm btn-outline-secondary" id="btnDetail" href="<?= base_url('penjualan/detail/' . $user['id_penjualan']); ?>">Detail</a>

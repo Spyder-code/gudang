@@ -17,6 +17,7 @@ use App\Models\Penjahitan;
 use App\Models\Penjualan_model;
 use App\Models\PenjualanModel;
 use App\Models\Produk;
+use Dompdf\Dompdf;
 
 helper('form');
 
@@ -402,6 +403,33 @@ class Gudang extends BaseController
         return view('dashboard/gudang/laporan',$data);
     }
 
+    public function laporan_cetak()
+    {
+        $model = new DetailPenjualan();
+        $penjahitan = new DetailPenjahitan();
+        $data = [
+            'data' => $model->getAllData(), 
+            'title' => 'Laporan',
+            'pages'=> 'Laporan',
+        ];
+
+        $bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+        $data['month'] = $this->request->getGet('month') ?? date('m');
+        $data['year'] = $this->request->getGet('year') ?? date('Y');
+        $data['masuk'] = $penjahitan->getLaporan($data['month'], $data['year']);
+        $data['keluar'] = $model->getLaporan($data['month'], $data['year']);
+        $data['title'] = 'Laporan '.$bulan[(int)$data['month']-1].' '.$data['year'];
+
+        $dompdf = new Dompdf();
+        $html = view('print/laporan_gudang',$data);
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4');
+        $dompdf->render();
+        $dompdf->stream('Laporan Gudang.pdf',['compress'=>true,'Attachment'=>false]);
+
+        // return view('print/laporan_gudang',$data);
+    }
+
     public function ajukan_produksi($id)
     {
         $produk = new Produk();
@@ -409,7 +437,8 @@ class Gudang extends BaseController
 
         $insert = [
             'pesan' => 'Pengajuan produksi produk '.$produk['nama'],
-            'role' => 'produksi',
+            'from' => 'gudang',
+            'to' => 'produksi',
         ];
 
         $notifikasi = new Notifikasi();

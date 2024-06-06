@@ -55,7 +55,8 @@ const myModalAlternative = new bootstrap.Modal(document.getElementById('myModal'
       if (oke) {
         // ambil data dari tabel
         let data = [];
-        let table = document.querySelector('#table');
+        let table = document.getElementById('table');
+        console.log(table);
         let rows = table.querySelectorAll('tr');
         for (let i = 1; i < rows.length; i++) {
           let row = rows[i];

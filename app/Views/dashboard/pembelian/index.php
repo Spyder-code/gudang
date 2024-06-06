@@ -7,7 +7,7 @@
                 <div class="card-header">
                     <span class="h5"><?= $title ?></span>
                     <div class="card-tools">
-                        <button type="button" class="btn btn-sm btn-outline-dark" onclick="window.location.href='<?= base_url('produk/create'); ?>'">Tambah Data</button>
+                        <button type="button" class="btn btn-sm btn-outline-dark" onclick="window.location.href='<?= base_url('pembelian/create'); ?>'">Tambah Data</button>
                     </div>
                 </div>
                 <div class="card-body">
@@ -46,18 +46,14 @@
                             <?php foreach ($data as  $row) : ?>
                                 <tr>
                                     <th scope="row"><?= $no++; ?></td>
-                                    <td><?= $row['tgl']; ?></td>
+                                    <td><?= date('d/m/Y', strtotime($row['tgl'])); ?></td>
                                     <td><?= $row['supplier']; ?></td>
                                     <td><?= $row['nama_bahan']; ?></td>
                                     <td><?= $row['jumlah']; ?></td>
                                     <td>Rp <?= number_format($row['harga'], 0, ',', '.'); ?></td>
                                     <td>Rp <?= number_format($row['total'], 0, ',', '.'); ?></td>
                                     <td>
-                                        <a class="btn btn-sm btn-outline-secondary" id="btnDetail" href="<?= base_url('produk/detail/' . $row['no_pembelian']); ?>">Detail</a>
-                                        <a href="<?= base_url('produk/edit/' . $row['no_pembelian']); ?>" class="btn btn-sm btn-outline-success">Edit</a>
-                                        <?php if ( session()->get('jabatan') == 'gudang') : ?>
-                                            <a href="<?= base_url('gudang/ajukan_produksi/' . $row['no_pembelian']); ?>" class="btn btn-sm btn-outline-warning">Ajukan Produksi</a>
-                                        <?php endif; ?>
+                                        <a href="<?= base_url('pembelian/edit/' . $row['no_pembelian']); ?>" class="btn btn-sm btn-outline-success">Edit</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

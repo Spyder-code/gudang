@@ -52,6 +52,9 @@
                                 <option <?= $year=='2025'  ? 'selected' : ''?> value="2025">2025</option>
                             </select>
                         </div>
+                        <div class="col-3">
+                        <button class="btn btn-success mt-4" formtarget="d_blank" type="submit" formaction="<?= base_url('produksi/laporan_cetak'); ?>"><i class="fas fa-print"></i> Cetak</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -63,7 +66,7 @@
                     <span class="h5">Laporan Produksi</span>
                 </div>
                 <div class="card-body">
-                <table class="table table-bordered table-hover">
+                    <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
