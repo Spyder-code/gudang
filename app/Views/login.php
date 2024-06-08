@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login 3</title>
+  <title>Login</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,600,0,0" />
   <style>
     * {
@@ -25,17 +25,16 @@
     }
 
     body {
-      display: grid;
-      place-items: center;
       margin: 0;
       padding: 0 24px;
-      /* background-color: #157ae1; */
+      background-color: #071e26;
       background-size: 2000px 1000px;
       background-position: -500px 0;
       color: #f9f9f9;
       font-family: "Euclid Circular A";
       animation: gradient 10s infinite alternate linear;
-      color: #161616 !important;
+      color: #beae90 !important;
+      width: 100%;
     }
 
     @media (width >=500px) {
@@ -45,17 +44,12 @@
     }
 
     .login {
-      position: fixed;
       z-index: 3;
-      top: 50%;
-      left: 50%;
-      translate: -50% -50%;
-      width: 90%;
       padding: 70px 30px 44px;
       border-radius: 22px;
-      /* background: #161616; */
+      /* background: ##beae90; */
       text-align: center;
-      border: 1px solid black;
+      border: 1px solid #beae90;
     }
 
     @media (width >=450px) {
@@ -79,7 +73,7 @@
       object-fit: cover;
       border-radius: 50%;
 
-      border: 4px solid #161616;
+      border: 4px solid #beae90;
     }
 
     .login>h2 {
@@ -129,23 +123,23 @@
 
     .login-form input {
       background: transparent;
-      border: 2px solid black;
+      border: 2px solid #beae90;
       font-size: 18px;
       padding: 0 20px 0 50px;
       color: inherit;
     }
 
     .login-form input:focus {
-      border-color: #157ae1;
+      border-color: #beae90;
     }
 
     .login-form input:focus~span {
-      color: #157ae1;
+      color: #beae90;
     }
 
     .login-form button {
       cursor: pointer;
-      background: #157ae1;
+      background: #beae90;
       color: #f9f9f9;
       border: 0;
       font-weight: 600;
@@ -153,7 +147,7 @@
     }
 
     .login-form a {
-      color: #157ae1;
+      color: #beae90;
       font-size: 16px;
       text-align: left;
       text-decoration: none;
@@ -163,34 +157,39 @@
 
 <body>
 
-  <div class="login">
-    <h2>LOGIN</h2>
-    <!-- <h3>Hello Guysss!</h3> -->
-
-    <?php if (session()->getFlashdata('danger')) : ?>
-        <div class="alert alert-danger" style="background-color: #ec9e9e; color: red; padding: 7px; border: 1px solid red; border-radius: 25px; margin: 10px;">
-            <?= session()->getFlashdata('danger') ?>
+    <div style="display: flex; justify-content: center; align-items: center; padding: 10px; gap: 130px; margin-top: 60px">
+      <img src="<?= base_url('img/logo.jpeg'); ?>" alt="" style="width:230px">
+      <div class="login">
+        <h2>LOGIN</h2>
+        <!-- <h3>Hello Guysss!</h3> -->
+    
+        <?php if (session()->getFlashdata('danger')) : ?>
+            <div class="alert alert-danger" style="background-color: #ec9e9e; color: red; padding: 7px; border: 1px solid red; border-radius: 25px; margin: 10px;">
+                <?= session()->getFlashdata('danger') ?>
+            </div>
+        <?php endif; ?>
+    
+        <div style="display: flex; justify-content: between;">
+          <form class="login-form" method="post" action="<?= base_url('home/login'); ?>" autocomplete="off">
+            <div class="textbox">
+              <input type="text" placeholder="Username" name="username" autofocus />
+              <span class="material-symbols-outlined" style="color: #beae90 !important;"> account_circle </span>
+            </div>
+            <div class="textbox">
+              <!-- <span><?php if (!empty($error)) : echo $error ?></span>
+            <?php endif ?> -->
+            </div>
+            <div class="textbox">
+              <input type="password" placeholder="Password" name="pass" />
+              <span class="material-symbols-outlined" style="color: #beae90 !important;"> lock </span>
+            </div>
+            <button type="submit">LOGIN</button>
+            <!-- <a href="https://website.com">Forgot your credentials?</a> -->
+          </form>
         </div>
-    <?php endif; ?>
-
-    <form class="login-form" method="post" action="<?= base_url('home/login'); ?>" autocomplete="off">
-      <div class="textbox">
-        <input type="text" placeholder="Username" name="username" autofocus />
-        <span class="material-symbols-outlined" style="color: #161616 !important;"> account_circle </span>
+    
       </div>
-      <div class="textbox">
-        <!-- <span><?php if (!empty($error)) : echo $error ?></span>
-      <?php endif ?> -->
-      </div>
-      <div class="textbox">
-        <input type="password" placeholder="Password" name="pass" />
-        <span class="material-symbols-outlined" style="color: #161616 !important;"> lock </span>
-      </div>
-      <button type="submit">LOGIN</button>
-      <!-- <a href="https://website.com">Forgot your credentials?</a> -->
-    </form>
-
-  </div>
+    </div>
 
 </body>
 

@@ -102,11 +102,12 @@ class Produksi extends BaseController
         // $produkModel = new Produk();
         $data['penjahitan'] = $this->jahit->findAll();
         // $data['produk'] = $produkModel->findAll();
-        $data['details'] = $this->detailjahit->where('no_penjahitan', $id)->findAll();
+        $data['details'] = $this->detailjahit->join('produk', 'detail_jahit.id_produk = produk.id_produk')->where('no_penjahitan', $id)->findAll();
 
-        $data['title'] = 'detail';
+        $data['title'] = 'Detail Penjahitan';
+        $data['pages'] = 'Produksi';
 
-        return view('produksi/detailpenjahitan', $data);
+        return view('dashboard/produksi/detail_penjahitan', $data);
     }
 
     public function tambahProduksi()
@@ -166,6 +167,17 @@ class Produksi extends BaseController
         $totalBayar = intval($this->request->getPost('biaya_produksi'));
         $detailPenjahitanModel->insertBatch($data);
         $this->jahit->update($data2, ['total_bayar' => strval($totalBayar)]);
+        $produk_m = new Produk();
+        $produk = $produk_m->find($this->request->getPost('id_produk'));
+        $produk_m->update($this->request->getPost('id_produk'), ['jumlah' => $produk['jumlah'] + $this->request->getPost('jumlah')]);
+        $insert = [
+            'pesan' => $this->request->getPost('jumlah').' Barang Masuk Produk '.$produk['nama'],
+            'from' => 'produksi',
+            'to' => 'gudang',
+        ];
+
+        $notifikasi = new Notifikasi();
+        $notifikasi->insert($insert);
     }
     public function get_harga_produk()
     {

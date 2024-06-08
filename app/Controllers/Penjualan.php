@@ -7,6 +7,7 @@ use App\Models\ChatModel;
 use App\Models\DetailPenjualan;
 use App\Models\Penjualan_model;
 use App\Models\laporan_model;
+use App\Models\Notifikasi;
 use App\Models\Produk;
 
 use CodeIgniter\I18n\Time;
@@ -146,6 +147,17 @@ class Penjualan extends BaseController
         $detailPenjualanModel->insertBatch($data);
         $this->penjualanModel->update($data2, ['total_bayar' => strval($totalBayar)]);
 
+        $produk_m = new Produk();
+        $produk = $produk_m->find($this->request->getPost('id_produk'));
+        $produk_m->update($this->request->getPost('id_produk'), ['jumlah' => $produk['jumlah'] - $this->request->getPost('jumlah')]);
+        $insert = [
+            'pesan' => $this->request->getPost('jumlah').' Barang Keluar Produk '.$produk['nama'],
+            'from' => 'penjualan',
+            'to' => 'gudang',
+        ];
+
+        $notifikasi = new Notifikasi();
+        $notifikasi->insert($insert);
         return redirect()->route('penjualan/view');
     }
 
